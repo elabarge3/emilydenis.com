@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CaseStudyHero from '../components/CaseStudyHero.astro';
+
+// TODO(emily): confirm the "built for Avery" framing is one you want public,
+// and add any traction you'd like shown (downloads, active families).
+
+const APP_STORE = 'https://apps.apple.com/us/app/napmap-baby-nap-schedule/id6783008121';
+---
+
+<BaseLayout
+  title="NapMap — Case Study | Emily Denis"
+  description="Nap schedules without the math: log naps as they happen and the baby's day recalculates around them. Free forever. PM case study by Emily Denis."
+  ogImage="/images/napmap-hero.png"
+>
+  <Header backLink />
+
+  <CaseStudyHero
+    title="NapMap"
+    tagline="Case study · adaptive scheduling"
+    accent="text-emerald-700 dark:text-emerald-400"
+    intro="Catch the sleepy moment before it slips away. Log a nap as it happens — one big button — and NapMap recalculates the rest of the baby's day using age-aware wake windows. No spreadsheets, no wake-window math in your head."
+    facts={[
+      { label: 'Role', value: 'PM · design · engineering (solo)' },
+      { label: 'Status', value: 'iOS App Store + web (PWA)' },
+      { label: 'Rating', value: '5.0 on the App Store' },
+      { label: 'Price', value: 'Free, forever' },
+    ]}
+    ctas={[
+      { label: 'Download on the App Store', href: APP_STORE, primary: true },
+      { label: 'Visit napmap.app', href: 'https://napmap.app' },
+    ]}
+  />
+
+  <article class="prose-custom mx-auto max-w-3xl px-6 pb-24">
+    <h2>The problem</h2>
+    <p>
+      Infant sleep runs on "wake windows" — how long a baby can comfortably stay
+      awake between naps. Parents are told to track them, but the arithmetic lands
+      on people who are themselves sleep-deprived: <em>she woke at 6:40, the window
+      is two and a quarter hours, the nap ran short, so bedtime moves…</em> Every
+      nap that runs long or short invalidates the rest of the day's plan, and the
+      recalculation happens in an exhausted parent's head. I built NapMap while
+      living exactly this — it's dedicated to my daughter.
+    </p>
+
+    <h2>The insight: log reality, recalculate the plan</h2>
+    <p>
+      Most schedule apps make the parent serve the schedule. NapMap inverts it — the
+      same design DNA as my training coach, FitScript: <strong>capture what actually
+      happened with near-zero effort, and let the plan adapt around reality.</strong>
+    </p>
+    <ul>
+      <li><strong>One-thumb logging.</strong> A single big Start Nap / End Nap button, designed for a parent holding a baby. Fix the times later with a tap if needed.</li>
+      <li><strong>Age-aware wake windows</strong> that lengthen as the baby grows, with a heads-up when they shift — and a one-tap way to drop a nap when it's clearly time.</li>
+      <li><strong>Anchored on what your family cares about</strong>: build the day from the morning wake-up or from bedtime, and get nudged when the two stop lining up.</li>
+      <li><strong>It learns the actual baby.</strong> Age-based windows are averages; after about two weeks of logs, NapMap tunes to the baby's real rhythm — always within age-appropriate bounds. The schedule fits the baby instead of forcing the baby onto a chart.</li>
+      <li><strong>Night mode for night people.</strong> Walk the night with Awake / Back to Sleep, and the interface automatically shifts to a dark, dim theme during quiet hours so 3am doesn't start with a white flash.</li>
+      <li><strong>Share the load.</strong> Invite the other caregiver; a nap logged by one shows up for the other.</li>
+    </ul>
+
+    <h2>Principled choices</h2>
+    <h3>Free, forever — on purpose</h3>
+    <blockquote>
+      "Every nap app and sleep consultant seemed to want a credit card before
+      offering any real help — comfort tucked behind a paywall, sold to parents on
+      their hardest nights. NapMap is free. Good sleep, for your baby and for you,
+      shouldn't cost anything."
+    </blockquote>
+    <p>
+      That's from the App Store listing. It's a product position, not an oversight:
+      the category monetizes anxiety, and refusing to is both the right call and the
+      clearest differentiator available.
+    </p>
+    <h3>Honest numbers, no black box</h3>
+    <p>
+      Sleep-duration guidance comes from the American Academy of Sleep Medicine and
+      the National Sleep Foundation. Wake windows are a practical convention, not a
+      clinical rule — <strong>and the app says so plainly</strong>, alongside a clear
+      "not medical advice; you know your baby best." Trust in a parenting product is
+      earned by what you refuse to overclaim.
+    </p>
+
+    <h2>Shipping velocity</h2>
+    <p>
+      NapMap went from App Store launch to version 1.6 in its first two weeks —
+      tightening the loop from real family feedback (including my own household's).
+      It currently holds a 5.0 rating.
+    </p>
+
+    <h2>What I'd measure</h2>
+    <ul>
+      <li>Time-to-first-logged-nap (activation for an exhausted user must be minutes).</li>
+      <li>Naps logged per day per family — the habit metric.</li>
+      <li>Schedule stability over weeks: naps and bedtime converging to consistent times, the outcome parents are buying.</li>
+      <li>Second-caregiver invite rate — the household, not the individual, is the unit of retention.</li>
+    </ul>
+
+    <div class="mt-12 flex flex-wrap gap-3">
+      <a href={APP_STORE} target="_blank" rel="noopener" class="btn-primary">App Store ↗</a>
+      <a href="https://napmap.app" target="_blank" rel="noopener" class="btn-secondary">napmap.app ↗</a>
+      <a href="/" class="btn-secondary">← All work</a>
+    </div>
+  </article>
+
+  <Footer />
+</BaseLayout>

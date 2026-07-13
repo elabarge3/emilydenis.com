@@ -1,0 +1,30 @@
+---
+interface Props {
+  /** Set on case-study pages to show a back link instead of section nav. */
+  backLink?: boolean;
+}
+const { backLink = false } = Astro.props;
+---
+
+<header class="sticky top-0 z-10 border-b border-zinc-950/5 bg-zinc-50/80 backdrop-blur dark:border-white/5 dark:bg-zinc-950/80">
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <a href="/" class="text-base font-bold tracking-tight text-zinc-900 dark:text-white">
+      Emily Denis
+    </a>
+    <nav class="flex items-center gap-5 text-sm font-medium text-zinc-600 dark:text-zinc-400">
+      {
+        backLink ? (
+          <a href="/#work" class="hover:text-zinc-900 dark:hover:text-white">
+            ← All work
+          </a>
+        ) : (
+          <a href="/#work" class="hover:text-zinc-900 dark:hover:text-white">
+            Work
+          </a>
+        )
+      }
+      <a href="/#about" class="hover:text-zinc-900 dark:hover:text-white">About</a>
+      <a href="mailto:emilydenis43@gmail.com" class="hover:text-zinc-900 dark:hover:text-white">Contact</a>
+    </nav>
+  </div>
+</header>

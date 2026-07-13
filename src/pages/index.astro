@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const FITSCRIPT_URL = 'https://gregarious-speculoos-d8a35e.netlify.app';
+---
+
+<BaseLayout
+  title="Emily Denis — Product Manager"
+  description="Product manager who ships: three live consumer apps built end to end. Case studies in personalized guidance, adaptive planning, and AI products with an honest quality bar."
+>
+  <Header />
+
+  <!-- Hero -->
+  <section class="mx-auto max-w-5xl px-6 pb-20 pt-20 sm:pt-28">
+    <p class="text-sm font-bold uppercase tracking-wide text-indigo-600 dark:text-indigo-400">
+      Product manager · builder
+    </p>
+    <h1 class="mt-4 max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight text-zinc-900 dark:text-white sm:text-6xl">
+      I build products that keep plans alive when real life happens.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+      Three consumer apps, live and in use — an AI training coach, a social planning
+      tool, and a baby sleep scheduler. Each one takes a plan people care about and
+      adapts it to the day they're actually having. I do the product thinking, the
+      design, and the code.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <a href="#work" class="btn-primary">See the work</a>
+      <a href={`${FITSCRIPT_URL}/demo`} target="_blank" rel="noopener" class="btn-secondary">
+        Try a live product demo ↗
+      </a>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="border-t border-zinc-950/5 bg-white py-20 dark:border-white/5 dark:bg-zinc-900/40">
+    <div class="mx-auto max-w-5xl px-6">
+      <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">Work</h2>
+      <p class="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-400">
+        All three are shipped, running products — not mockups. Every case study links
+        to the live thing.
+      </p>
+
+      <div class="mt-10 grid grid-cols-1 gap-8">
+        <ProjectCard
+          title="FitScript"
+          tagline="AI training coach — flagship case study"
+          description="Reads your sleep, recovery, race calendar, and how you say you feel, then prescribes the one workout your body is ready for — with the reasoning stated in your own numbers. An eval suite gates every coach change; a deterministic engine backstops the AI."
+          image="/images/fitscript-dashboard.png"
+          imageAlt="FitScript dashboard showing an AI-coached workout recommendation with reasoning"
+          href="/fitscript"
+          chips={['AI coaching', 'Eval-gated safety', 'Oura + Strava + Apple Health', 'React', 'Supabase', 'Claude']}
+          links={[
+            { label: 'Live demo', href: `${FITSCRIPT_URL}/demo` },
+            { label: 'App', href: FITSCRIPT_URL },
+          ]}
+        />
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <ProjectCard
+            title="HangEasy"
+            tagline="Make plans that actually happen"
+            description="Group threads die and another month goes by. HangEasy gives the organizer a two-minute flow and guests a zero-friction, no-account RSVP — because the plan only happens if responding is easier than ignoring."
+            image="/images/hangeasy-hero.png"
+            imageAlt="HangEasy landing page with a Pizza Night hang card and live RSVPs"
+            href="/hangeasy"
+            accent="text-fuchsia-600 dark:text-fuchsia-400"
+            chips={['Social planning', 'Zero-friction RSVP', 'SMS', 'Web app']}
+            links={[{ label: 'hangeasy.app', href: 'https://hangeasy.app' }]}
+          />
+
+          <ProjectCard
+            title="NapMap"
+            tagline="Nap schedules without the math"
+            description="Log a nap as it happens and the rest of the baby's day recalculates — age-aware wake windows that learn your baby's actual rhythm. Free forever, honestly sourced, built for my own daughter. 5.0 on the App Store."
+            image="/images/napmap-hero.png"
+            imageAlt="NapMap landing page showing a baby's recalculated nap day"
+            href="/napmap"
+            accent="text-emerald-700 dark:text-emerald-400"
+            chips={['iOS + PWA', 'Adaptive scheduling', 'Caregiver sharing', 'Free forever']}
+            links={[
+              { label: 'App Store', href: 'https://apps.apple.com/us/app/napmap-baby-nap-schedule/id6783008121' },
+              { label: 'napmap.app', href: 'https://napmap.app' },
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / How I work -->
+  <section id="about" class="py-20">
+    <div class="mx-auto max-w-5xl px-6">
+      <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">How I work</h2>
+      <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="card p-6">
+          <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Ship the loop, not the feature list</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Every product above is one core loop, polished until it's automatic:
+            check in → get a plan → live your day → the plan adapts. Features only
+            ship when they make the loop tighter.
+          </p>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Hold AI to an explicit bar</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            FitScript's coach ships behind an eval suite that encodes the safety and
+            quality bar as executable scenarios — it has already caught real gaps
+            before users could. "Accurate and safe" is a test result, not a vibe.
+          </p>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Meet people where they are</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            A rough night with a newborn is real training load. A guest who won't
+            download an app is a design constraint. How people feel and behave is
+            first-class data, and the products treat it that way — without guilt.
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-10 max-w-2xl leading-relaxed text-zinc-600 dark:text-zinc-400">
+        I run these products end to end — research, product decisions, design, code,
+        and iteration in production. Want to talk?
+        <a href="mailto:emilydenis43@gmail.com" class="link">emilydenis43@gmail.com</a>
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

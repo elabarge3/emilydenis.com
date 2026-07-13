@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CaseStudyHero from '../components/CaseStudyHero.astro';
+
+const APP = 'https://gregarious-speculoos-d8a35e.netlify.app';
+---
+
+<BaseLayout
+  title="FitScript — Case Study | Emily Denis"
+  description="An AI training coach that adapts to your body, your races, and your life — with an eval suite as the quality bar. PM case study by Emily Denis."
+  ogImage="/images/fitscript-dashboard.png"
+>
+  <Header backLink />
+
+  <CaseStudyHero
+    title="FitScript"
+    tagline="Flagship case study · AI personalized guidance"
+    intro="An AI training coach that reads your sleep, recovery, race calendar, and how you say you feel — then prescribes the one workout your body is actually ready for, with the reasoning stated in your own numbers."
+    facts={[
+      { label: 'Role', value: 'PM · design · engineering (solo)' },
+      { label: 'Status', value: 'Live, in daily use' },
+      { label: 'Stack', value: 'React · Supabase · Claude' },
+      { label: 'Quality bar', value: '25/25 eval checks' },
+    ]}
+    ctas={[
+      { label: 'Try the live demo — no signup', href: `${APP}/demo`, primary: true },
+      { label: 'Open the app', href: APP },
+    ]}
+  />
+
+  <article class="prose-custom mx-auto max-w-3xl px-6 pb-24">
+    <h2>The problem</h2>
+    <p>
+      The motivated-but-constrained athlete trains for real races while juggling a
+      job, a new baby, and interrupted sleep. They own a wearable and they care about
+      doing the right workout — but nobody has time to synthesize readiness scores, a
+      training plan, and a four-race calendar at 6am. The data exists; the
+      <strong>synthesis</strong> is the missing product.
+    </p>
+    <p>
+      Generic plans break on contact with real life: a terrible night with a newborn
+      turns today's interval session into a liability, and a plan that can't bend
+      gets abandoned. FitScript's premise: <strong>the plan bends; it doesn't
+      break.</strong>
+    </p>
+
+    <h2>The daily loop</h2>
+    <p>
+      The product is one loop, designed to be as automatic as checking the weather.
+    </p>
+    <ul>
+      <li><strong>Overnight</strong> — Oura, Strava, or an Apple Health relay sync sleep, HRV, resting heart rate, and the week's training.</li>
+      <li><strong>Check-in</strong> — before the first plan of the day is generated, one tap: 😫 rough / 😐 okay / 💪 strong, plus an optional note ("baby was up all night").</li>
+      <li><strong>One recommendation</strong> — the coach weighs today's body against the race calendar and prescribes one concrete session, with reasoning that cites the athlete's own numbers, plus low- and high-energy alternatives.</li>
+      <li><strong>Refinement</strong> — "I only have 20 minutes." "My knee aches." One message re-plans today without losing the season.</li>
+      <li><strong>Feedback</strong> — "Mark as done" and a thumbs rating feed tomorrow's context, so the coach learns what actually lands.</li>
+    </ul>
+
+    <figure class="mt-8">
+      <img src="/images/fitscript-checkin.png" alt="FitScript's feel-first check-in: How are you feeling today, with one-tap rough/okay/strong options" class="card w-full" loading="lazy" />
+      <figcaption class="mt-2 text-center text-sm text-zinc-400">The feel-first check-in — asked once, before the day's plan exists.</figcaption>
+    </figure>
+    <figure class="mt-8">
+      <img src="/images/fitscript-plan.png" alt="Today's workout card: an easy recovery session with reasoning citing readiness, HRV, and the athlete's own check-in" class="card w-full" loading="lazy" />
+      <figcaption class="mt-2 text-center text-sm text-zinc-400">One recommendation with reasoning in the athlete's own numbers — here, respecting a "rough" check-in despite decent metrics.</figcaption>
+    </figure>
+
+    <h2>Product decisions that matter</h2>
+
+    <h3>1 · One recommendation, not a dashboard of scores</h3>
+    <p>
+      Wearables already give people numbers; the job to be done is the verdict.
+      The dashboard answers three questions in order — <em>How am I? What's coming?
+      What do I do today?</em> — and nothing else competes for attention.
+    </p>
+
+    <h3>2 · Subjective feel is first-class data</h3>
+    <p>
+      Metrics miss things bodies know. The check-in feeds the coach with an explicit
+      rule: <strong>when feel and metrics disagree, follow the more cautious
+      signal</strong>. Feeling rough on great numbers dials the day back; feeling
+      strong on poor recovery does not override the metrics. Both directions are
+      pinned by eval scenarios.
+    </p>
+
+    <h3>3 · Stability over novelty</h3>
+    <p>
+      Early versions regenerated the plan on every page load — different phrasing
+      each visit, which quietly erodes trust in a coach. Now the day's plan is
+      generated once, persisted, and refined only through conversation or an explicit
+      regenerate. Guidance you can leave and come back to.
+    </p>
+
+    <h3>4 · Feedback that actually teaches the coach</h3>
+    <p>
+      Thumbs and "did you do it?" aren't vanity metrics — the last week of prescribed
+      plans, with completion and ratings, is part of the coach's context. If long
+      sessions keep going uncompleted while short easy runs get done and rated up,
+      tomorrow's ask changes. <strong>Completion data beats intention</strong>, and
+      the coach never guilt-trips.
+    </p>
+
+    <h3>5 · Engineering for trust</h3>
+    <p>
+      The AI coach falls back to a deterministic rules engine when it's unavailable —
+      transparently, with a visible badge showing which engine produced today's plan.
+      Recovery data has an explicit source-priority chain (Oura → Garmin → Apple
+      Health → labeled sample data). No black boxes, no silent failures.
+    </p>
+
+    <h2>The eval suite is the quality bar</h2>
+    <p>
+      Personalized guidance with safety stakes cannot ship on vibes. FitScript's
+      golden-scenario eval suite encodes the product bar as executable checks, run
+      against <em>both</em> engines — the deterministic baseline and the deployed AI
+      coach:
+    </p>
+    <ul>
+      <li>Never prescribe intensity on a fever signal or an HRV crash — even when the readiness score looks fine.</li>
+      <li>Taper discipline in race week: high readiness five days before the A-race must <em>not</em> produce a big session.</li>
+      <li>No heroics the day after a race; real training on green days (no sandbagging).</li>
+      <li>Block-aware reasoning across four consecutive race weekends — one arc, one taper.</li>
+      <li>Check-in disagreement in both directions, and adherence collapse (a week of skipped plans must change the ask, not repeat it).</li>
+    </ul>
+    <p>
+      The suite has paid for itself: it caught the baseline
+      <strong>prescribing moderate endurance during a fever signal</strong> — the
+      readiness score looked fine; the temperature deviation didn't. That gap is now
+      fixed and regression-guarded. Coach prompt changes ship only when evals pass;
+      the suite has grown with the product from 12 checks to 25, and the deployed
+      coach currently passes <strong>25/25</strong>.
+    </p>
+
+    <figure class="mt-8">
+      <img src="/images/fitscript-chat.png" alt="FitScript coach chat adjusting today's plan conversationally" class="card w-full" loading="lazy" />
+      <figcaption class="mt-2 text-center text-sm text-zinc-400">The chat is a control surface for today's plan, not a chatbot destination.</figcaption>
+    </figure>
+
+    <h2>Worked example: the four-race autumn</h2>
+    <p>
+      A real calendar: a half marathon, a 10-miler, the Chicago Marathon (A-race),
+      and a 7-miler — four consecutive weekends. The coach treats the block as one
+      arc: build through early September, fold the first two races in as supported
+      efforts, protect Chicago with a genuine taper, treat the last as a celebratory
+      shakeout. On any given morning, a rough newborn night converts that day's
+      quality session into easy volume — and the coach says which day this week the
+      key session moves to.
+    </p>
+
+    <h2>Under the hood</h2>
+    <ul>
+      <li>React + Vite + Tailwind front end; Supabase (Postgres, auth, row-level security everywhere).</li>
+      <li>Netlify Functions back end; the coach is Claude (Opus 4.8) with structured outputs — guaranteed-parseable plans.</li>
+      <li>Ingestion: Oura (CORS-proxied), Strava (self-refreshing tokens), manual quick-log, and an Apple Health relay that turns any iPhone into a Garmin bridge.</li>
+      <li>Eval harness runs the same golden scenarios against the rules baseline (free, instant) and the deployed coach.</li>
+      <li>Zero-signup demo mode — the page you can try below — runs the real dashboard, check-in, and live coach entirely in memory.</li>
+    </ul>
+
+    <div class="mt-12 flex flex-wrap gap-3">
+      <a href={`${APP}/demo`} target="_blank" rel="noopener" class="btn-primary">Try the live demo ↗</a>
+      <a href="/" class="btn-secondary">← All work</a>
+    </div>
+  </article>
+
+  <Footer />
+</BaseLayout>
