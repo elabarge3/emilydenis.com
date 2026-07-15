@@ -10,7 +10,7 @@ import CaseStudyHero from '../components/CaseStudyHero.astro';
 ---
 
 <BaseLayout
-  title="HangEasy — Case Study | Emily Denis"
+  title="HangEasy Case Study | Emily Denis"
   description="Make plans that actually happen: a social planning tool where guests RSVP in one tap with no app and no account. PM case study by Emily Denis."
   ogImage="/images/hangeasy-hero.png"
 >
@@ -20,12 +20,12 @@ import CaseStudyHero from '../components/CaseStudyHero.astro';
     title="HangEasy"
     tagline="Case study · social coordination"
     accent="text-fuchsia-600 dark:text-fuchsia-400"
-    intro="Everyone says 'we should hang.' Group texts get noisy, someone doesn't reply, the thread dies, and another month goes by. HangEasy turns intent into a locked-in plan — in two minutes, with zero friction for guests."
+    intro="Everyone says 'we should hang.' Group texts get noisy, someone doesn't reply, the thread dies, and another month goes by. HangEasy turns intent into a locked-in plan in two minutes, with zero friction for guests."
     facts={[
       { label: 'Role', value: 'PM · design · engineering (solo)' },
       { label: 'Status', value: 'Live at hangeasy.app' },
       { label: 'Platform', value: 'Web (no install)' },
-      { label: 'Guest requirement', value: 'None — one tap' },
+      { label: 'Guest requirement', value: 'One tap, no account' },
     ]}
     ctas={[
       { label: 'Visit hangeasy.app', href: 'https://hangeasy.app', primary: true },
@@ -35,7 +35,7 @@ import CaseStudyHero from '../components/CaseStudyHero.astro';
   <article class="prose-custom mx-auto max-w-3xl px-6 pb-24">
     <h2>The problem</h2>
     <p>
-      Social plans don't fail because people don't want to see each other — they fail
+      Social plans don't fail because people don't want to see each other. They fail
       because coordination overhead outlives enthusiasm. A group thread starts warm,
       collects two "maybe"s and one silence, and quietly dies. The cost isn't an app
       problem; it's a <strong>friendship maintenance</strong> problem, and it
@@ -44,7 +44,7 @@ import CaseStudyHero from '../components/CaseStudyHero.astro';
 
     <h2>The insight: friction is asymmetric</h2>
     <p>
-      One person — the organizer — is motivated enough to do real work. Everyone else
+      One person, the organizer, is motivated enough to do real work. Everyone else
       will give you <em>one tap</em>, on a good day. Most planning tools fail because
       they tax the guests: download an app, create an account, learn a UI. HangEasy
       puts all the work on the person who already wants to do it and makes the
@@ -52,8 +52,8 @@ import CaseStudyHero from '../components/CaseStudyHero.astro';
     </p>
     <ul>
       <li><strong>No app, no account, no sign-up for guests.</strong> Every hang is a shareable link; RSVP is one tap. The easier it is to respond, the more people actually do.</li>
-      <li><strong>Time options, not scheduling tetris.</strong> The organizer proposes a few times and friends vote — no hunting for the single slot that magically works for everyone.</li>
-      <li><strong>Vibes set expectations.</strong> Coffee run, game night, hiking — guests know what they're saying yes to before they reply.</li>
+      <li><strong>Time options, not scheduling tetris.</strong> The organizer proposes a few times and friends vote. Nobody hunts for the single slot that magically works for everyone.</li>
+      <li><strong>Vibes set expectations.</strong> Coffee run, game night, hiking: guests know what they're saying yes to before they reply.</li>
       <li><strong>A live view of who's in</strong>, and a clear moment where the plan is locked: no more "so are we actually doing this?"</li>
     </ul>
 
@@ -61,7 +61,7 @@ import CaseStudyHero from '../components/CaseStudyHero.astro';
     <h3>SMS, not push</h3>
     <p>
       Notifications matter for a coordination product, but push requires an installed
-      app — which guests explicitly don't have. SMS reaches everyone with a phone
+      app, which guests explicitly don't have. SMS reaches everyone with a phone
       number, with a plain opt-out. The channel choice falls straight out of the
       zero-install constraint.
     </p>
@@ -70,14 +70,14 @@ import CaseStudyHero from '../components/CaseStudyHero.astro';
       Polls and threads already exist. What they lack is the state transition from
       "gauging interest" to <strong>"this is happening: Friday, 7pm, Emily's
       place."</strong> HangEasy is designed around reaching and celebrating that
-      moment — everything else (vibes, votes, links) exists to get there faster.
+      moment; everything else (vibes, votes, links) exists to get there faster.
     </p>
 
     <h2>What I'd measure</h2>
     <ul>
-      <li><strong>Confirmation rate</strong>: share of created hangs that reach a locked-in date — the product's one number.</li>
+      <li><strong>Confirmation rate</strong>: the share of created hangs that reach a locked-in date. This is the product's one number.</li>
       <li>Guest RSVP rate per share (does zero-friction actually convert?).</li>
-      <li>Repeat organizers within 30 days — the habit signal.</li>
+      <li>Repeat organizers within 30 days, the habit signal.</li>
       <li>Time from hang creation to confirmation.</li>
     </ul>
 

@@ -8,29 +8,31 @@ const FITSCRIPT_URL = 'https://fitscript.emilydenis.com';
 ---
 
 <BaseLayout
-  title="Emily Denis — Product Manager"
-  description="Product manager who ships: three live consumer apps built end to end. Case studies in personalized guidance, adaptive planning, and AI products with an honest quality bar."
+  title="Emily Denis | Product Manager"
+  description="Product manager who loves solving customer problems end to end. Case studies from three consumer apps I built and shipped: an AI training coach, a social planning tool, and a baby nap scheduler."
 >
   <Header />
 
   <!-- Hero -->
   <section class="mx-auto max-w-5xl px-6 pb-20 pt-20 sm:pt-28">
     <p class="text-sm font-bold uppercase tracking-wide text-indigo-600 dark:text-indigo-400">
-      Product manager · builder
+      Product manager
     </p>
     <h1 class="mt-4 max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight text-zinc-900 dark:text-white sm:text-6xl">
-      I build products that keep plans alive when real life happens.
+      I love solving customer problems end to end.
     </h1>
     <p class="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-      Three consumer apps, live and in use — an AI training coach, a social planning
-      tool, and a baby sleep scheduler. Each one takes a plan people care about and
-      adapts it to the day they're actually having. I do the product thinking, the
-      design, and the code.
+      I'm Emily. My favorite part of product work is staying close to one
+      problem from the first conversation to the shipped fix. I've built three
+      small consumer apps that way: FitScript, an AI training coach; HangEasy,
+      a tool for making plans with friends; and NapMap, a nap scheduler for
+      tired parents. Each one started as a real problem in my own life, and
+      all three are live and in use today.
     </p>
     <div class="mt-8 flex flex-wrap items-center gap-3">
       <a href="#work" class="btn-primary">See the work</a>
       <a href={`${FITSCRIPT_URL}/demo`} target="_blank" rel="noopener" class="btn-secondary">
-        Try a live product demo ↗
+        Try the FitScript demo ↗
       </a>
     </div>
   </section>
@@ -40,19 +42,20 @@ const FITSCRIPT_URL = 'https://fitscript.emilydenis.com';
     <div class="mx-auto max-w-5xl px-6">
       <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">Work</h2>
       <p class="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-400">
-        All three are shipped, running products — not mockups. Every case study links
-        to the live thing.
+        Each case study walks through the problem, the decisions I made along
+        the way, and how I judge whether it's working. All three link to the
+        live product so you can try it yourself.
       </p>
 
       <div class="mt-10 grid grid-cols-1 gap-8">
         <ProjectCard
           title="FitScript"
-          tagline="AI training coach — flagship case study"
-          description="Reads your sleep, recovery, race calendar, and how you say you feel, then prescribes the one workout your body is ready for — with the reasoning stated in your own numbers. An eval suite gates every coach change; a deterministic engine backstops the AI."
+          tagline="An AI coach that fits training to real life"
+          description="FitScript reads your sleep, recovery, and race calendar, asks how you're actually feeling, and suggests one workout for the day with the reasoning spelled out in your own numbers. You can adjust the plan just by telling the coach what's going on. Every change to the coach has to pass an eval suite before it ships, and a rules engine steps in whenever the AI is unavailable."
           image="/images/fitscript-dashboard.png"
           imageAlt="FitScript dashboard showing an AI-coached workout recommendation with reasoning"
           href="/fitscript"
-          chips={['AI coaching', 'Eval-gated safety', 'Oura + Strava + Apple Health', 'React', 'Supabase', 'Claude']}
+          chips={['Personalized guidance', 'Conversational coaching', 'Evals', 'Oura + Strava + Apple Health', 'Claude']}
           links={[
             { label: 'Live demo', href: `${FITSCRIPT_URL}/demo` },
             { label: 'App', href: FITSCRIPT_URL },
@@ -63,19 +66,19 @@ const FITSCRIPT_URL = 'https://fitscript.emilydenis.com';
           <ProjectCard
             title="HangEasy"
             tagline="Make plans that actually happen"
-            description="Group threads die and another month goes by. HangEasy gives the organizer a two-minute flow and guests a zero-friction, no-account RSVP — because the plan only happens if responding is easier than ignoring."
+            description="Group threads fizzle and another month goes by. HangEasy gives the organizer a two minute flow and lets guests RSVP in one tap, with no app and no account. The whole product exists to get a plan from 'we should hang' to a confirmed date."
             image="/images/hangeasy-hero.png"
             imageAlt="HangEasy landing page with a Pizza Night hang card and live RSVPs"
             href="/hangeasy"
             accent="text-fuchsia-600 dark:text-fuchsia-400"
-            chips={['Social planning', 'Zero-friction RSVP', 'SMS', 'Web app']}
+            chips={['Social planning', 'One-tap RSVP', 'SMS', 'Web app']}
             links={[{ label: 'hangeasy.app', href: 'https://hangeasy.app' }]}
           />
 
           <ProjectCard
             title="NapMap"
             tagline="Nap schedules without the math"
-            description="Log a nap as it happens and the rest of the baby's day recalculates — age-aware wake windows that learn your baby's actual rhythm. Free forever, honestly sourced, built for my own daughter. 5.0 on the App Store."
+            description="Log a nap as it happens and the rest of the baby's day recalculates, using wake windows that adjust to your baby's age and actual rhythm. I built it for my own daughter and kept it free on purpose. It currently holds a 5.0 rating on the App Store."
             image="/images/napmap-hero.png"
             imageAlt="NapMap landing page showing a baby's recalculated nap day"
             href="/napmap"
@@ -97,35 +100,39 @@ const FITSCRIPT_URL = 'https://fitscript.emilydenis.com';
       <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">How I work</h2>
       <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
         <div class="card p-6">
-          <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Ship the loop, not the feature list</h3>
+          <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Start with someone's real day</h3>
           <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Every product above is one core loop, polished until it's automatic:
-            check in → get a plan → live your day → the plan adapts. Features only
-            ship when they make the loop tighter.
+            Each of these apps came from watching a problem up close: a training
+            plan that fell apart after a newborn's bad night, a group chat that
+            never picked a date, wake-window math at 3am. I try to understand
+            the whole problem before deciding what to build.
           </p>
         </div>
         <div class="card p-6">
-          <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Hold AI to an explicit bar</h3>
+          <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Hold AI to a measurable bar</h3>
           <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            FitScript's coach ships behind an eval suite that encodes the safety and
-            quality bar as executable scenarios — it has already caught real gaps
-            before users could. "Accurate and safe" is a test result, not a vibe.
+            FitScript's coach only changes when its eval suite passes. Writing
+            those scenarios taught me more about the product than any single
+            feature did, and the suite caught a real safety gap before a user
+            ever hit it.
           </p>
         </div>
         <div class="card p-6">
           <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Meet people where they are</h3>
           <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            A rough night with a newborn is real training load. A guest who won't
-            download an app is a design constraint. How people feel and behave is
-            first-class data, and the products treat it that way — without guilt.
+            A rough night with a newborn is real training load. A guest who
+            won't download an app is a design constraint. I'd rather adapt the
+            product to the person than ask the person to adapt to the product.
           </p>
         </div>
       </div>
 
       <p class="mt-10 max-w-2xl leading-relaxed text-zinc-600 dark:text-zinc-400">
-        I run these products end to end — research, product decisions, design, code,
-        and iteration in production. Want to talk?
-        <a href="mailto:emilydenis43@gmail.com" class="link">emilydenis43@gmail.com</a>
+        I'm an individual contributor and I like it that way: talking to users,
+        deciding what to build, designing, writing the code, and fixing what
+        breaks in production. If any of this resonates with what you're working
+        on, I'd love to hear from you at
+        <a href="mailto:emilydenis43@gmail.com" class="link">emilydenis43@gmail.com</a>.
       </p>
     </div>
   </section>
