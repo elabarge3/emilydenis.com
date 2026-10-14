@@ -33,6 +33,20 @@ body {
   @apply font-medium text-indigo-600 underline-offset-4 hover:underline dark:text-indigo-400;
 }
 
+/* Resume page */
+.res-section {
+  @apply mt-8;
+}
+.res-h2 {
+  @apply border-b border-zinc-950/10 pb-1 text-xs font-bold uppercase tracking-widest text-zinc-900 dark:border-white/10 dark:text-white;
+}
+.res-bullets {
+  @apply mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400;
+}
+.res-bullets strong {
+  @apply font-semibold text-zinc-800 dark:text-zinc-200;
+}
+
 /* Case-study long-form text */
 .prose-custom h2 {
   @apply mt-14 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white;

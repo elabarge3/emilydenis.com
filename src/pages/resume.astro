@@ -1,0 +1,425 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Single source of truth for the public resume. `public/resume.pdf` is generated
+// from this page: after editing, run `npm run resume:pdf`.
+//
+// Voice note, matching commit ce51289 (humbler IC voice, no em dashes): plain
+// verbs, concrete nouns, varied sentence length, numbers inside sentences rather
+// than in brackets. No bolded category label in front of every bullet.
+const UPDATED = 'October 2026';
+
+const contact = [
+  { label: 'Stamford, CT' },
+  { label: 'emilydenis43@gmail.com', href: 'mailto:emilydenis43@gmail.com' },
+  { label: '(630) 204-2911', href: 'tel:+16302042911' },
+  { label: 'linkedin.com/in/emilydenis43', href: 'https://www.linkedin.com/in/emilydenis43/' },
+  { label: 'emilydenis.com', href: 'https://emilydenis.com' },
+];
+
+const summary = `Principal Product Manager, eight years in data and AI products and the last three
+leading AI at Simon Data and then Monetate. I took over the combined AI portfolio when Monetate
+acquired Simon AI in July 2026: a conversational agent, a content agent, AI-generated datasets, and
+Monetate's MONET AI line. I stay close to the work, writing the requirements, sitting in on customer
+calls, and building a fair amount of the adoption reporting myself. I have also designed, built, and
+shipped three consumer apps on my own.`;
+
+const independent = {
+  intro:
+    'Three consumer apps designed, built, and shipped solo as PM, designer, and engineer. Case studies at emilydenis.com.',
+  projects: [
+    {
+      name: 'FitScript',
+      href: 'https://fitscript.emilydenis.com',
+      hrefLabel: 'fitscript.emilydenis.com',
+      body: "An AI training coach. It reads your sleep, HRV, recovery, and race calendar from Oura, Strava, and Apple Health, then recommends one workout for the day and spells out the reasoning in your own numbers. You adjust the plan by telling the coach what is going on. Nothing ships unless a 25-scenario eval suite passes, and that suite caught a fever-related safety gap before launch. A deterministic engine takes over whenever the model is unavailable.",
+    },
+    {
+      name: 'NapMap',
+      href: 'https://apps.apple.com/us/app/napmap-baby-nap-schedule/id6783008121',
+      hrefLabel: 'App Store',
+      body: "Log a nap as it happens and the rest of the baby's day recalculates, on wake windows that adapt to the baby's age and actual rhythm. I built it for my daughter and kept it free on purpose. Six releases in the first two weeks after launch, every one of them from user feedback. It holds a 5.0 rating on the App Store.",
+    },
+    {
+      name: 'HangEasy',
+      href: 'https://hangeasy.app',
+      hrefLabel: 'hangeasy.app',
+      body: 'Group plans that die in the group chat. The organizer gets a two minute setup, guests RSVP in one tap with no app and no account, and I measured exactly one thing: whether the plan actually got confirmed.',
+    },
+  ],
+};
+
+const experience = [
+  {
+    company: 'Monetate',
+    note: 'acquired Simon AI, fka Simon Data, 2026',
+    title: 'Principal Product Manager, AI Products',
+    location: 'Remote',
+    dates: 'December 2023 – Present',
+    bullets: [
+      'When the acquisition closed in July 2026 I took over AI for both companies, adding the MONET AI personalization line to the Simon products I already owned: AI Chat, Content Agent, and AI-Generated Datasets.',
+      'Built the adoption reporting for both AI agents myself, hands on in Claude Code. It tracks weekly active accounts and users, repeat-usage rate, how often AI output actually went live in a campaign, and a 0 to 100 account health score for the question that matters most: would this customer miss AI if we took it away?',
+      'Ran the usage audits behind a CTO-sponsored Snowflake cost push and found roughly $60k a month in savings. One change to refresh cadence stopped 20,000 redundant dataset runs a day.',
+      "Wrote an eight-session curriculum that brings Monetate's technical customer success managers onto Simon AI, built around one realistic marketer use case that carries through every session.",
+      'Cross-referenced renewal dates and ARR against AI usage to find the accounts worth a PM-led activation session, then ran them, including the launch demo for a major UK grocery and retail group. Picked up product relationships for accounts left uncovered after customer success turnover.',
+      'Replaced a third-party survey tool with an in-app NPS program I built, and shipped an in-app release note feature the same way.',
+    ],
+    sections: [
+      {
+        label: 'AI products shipped, 2023 to 2026',
+        items: [
+          {
+            name: 'AI Chat',
+            body: "Simon's conversational agent answers a marketer's questions against their own warehouse data and builds segments, flows, and draft journeys from a prompt. I shaped Projects, the shared team workspace, with private-by-default chats, admin-set AI context, and Connected Tools over MCP. Repeat usage has held at 58.7% over the last 90 days.",
+          },
+          {
+            name: 'AI-Generated Datasets',
+            body: 'A prompt-to-dataset product producing product affinities, predicted intent, and behavioral scores that drop into segmentation and personalization like any other warehouse table. Work that used to wait weeks on a data team now takes minutes.',
+          },
+          {
+            name: 'Content Agent',
+            body: "Conversational content generation built directly into Simon's template and content block editors. Repeat usage is 50% over the last 90 days.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    company: 'Simon Data',
+    title: 'Senior Product Manager, Identity',
+    location: 'Remote',
+    dates: 'December 2020 – December 2023',
+    bullets: [
+      'Led end-to-end development of the no-code entity resolution and data transformation products that became the Customer360 foundation the AI products query today.',
+      "Originated Identity Managed Services and helped stand up Simon's first professional services team around it. The offering drove roughly $1.2M in revenue impact through GTM work on positioning, demos, and webinars.",
+      'Launched Identity+, real-time de-anonymization that widened triggered-campaign reach by 25 to 33% and returned 7x on average for eCommerce clients.',
+      "Led Match+, which lifted clients' paid media match rates by 50 to 80% and improved marketing spend efficiency by about 5%.",
+      'Rebuilt client onboarding so account teams could get customers to a working identity model faster.',
+    ],
+  },
+  {
+    company: 'Simon Data',
+    title: 'Product Manager, Data Management',
+    location: 'Remote',
+    dates: 'April 2020 – December 2020',
+    bullets: [
+      'Redesigned the dataset creation and editing workflow from client interviews and product analytics, and shipped a notification center spanning Slack, email, and in-app alerts.',
+    ],
+  },
+  {
+    company: 'LiquidSky',
+    note: 'acquired by Walmart',
+    title: 'Associate Product Manager',
+    location: 'Hoboken, NJ',
+    dates: 'January 2019 – April 2020',
+    bullets: [
+      'Took the consumer beta signup site and the full registration flow from concept to launch, managing the outside UX and design agencies.',
+      "Led GDPR and CCPA compliance work alongside Walmart's privacy team.",
+    ],
+  },
+  {
+    company: 'Walmart eCommerce',
+    title: 'Associate Program Manager, Walmart eBooks',
+    location: 'Hoboken, NJ',
+    dates: 'January 2018 – January 2019',
+    bullets: [
+      'Launched the Walmart eBooks consumer platform with Rakuten Kobo, coordinating legal, PR, supply chain, finance, and customer support across Walmart eCommerce and Walmart Stores.',
+      'Wrote the training materials and the support experience for retail and call center staff serving a mainstream consumer audience.',
+    ],
+  },
+];
+
+const earlier = {
+  heading: 'Earlier Experience',
+  dates: 'July 2015 – January 2018',
+  bullets: [
+    '<strong>Walmart eCommerce, Category Specialist, Books.</strong> Ran onsite merchandising for 6.9M SKUs, built the Books taxonomy that added 5M searchable SKUs, and started the blog that became Walmart Book Club.',
+    '<strong>Jet.com, Associate Category Manager, Media.</strong> Launched book boxes, a new category for the marketplace.',
+    '<strong>Penguin Random House, Digital Account Manager and Sales Assistant.</strong> Managed Penguin Young Readers digital accounts with Apple, Google, and Kobo.',
+  ],
+};
+
+const skills = [
+  {
+    group: 'Product',
+    items:
+      'Product strategy and roadmaps, AI/ML product development, post-acquisition product integration, adoption and success metrics, experimentation and A/B testing, user research, user acceptance testing, agile, technical writing',
+  },
+  {
+    group: 'AI',
+    items:
+      'LLM agents and conversational interfaces, eval suites for accuracy, safety, and brand alignment, model cost and latency and accuracy tradeoffs, structured outputs, prompt engineering, MCP servers, Claude Code, prototyping',
+  },
+  {
+    group: 'Design and collaboration',
+    items:
+      'Figma, Miro, UX/UI design principles, user story creation, curriculum and enablement design, GTM and content strategy',
+  },
+];
+
+const education = [
+  {
+    school: 'Indiana University, Kelley School of Business',
+    detail: 'B.S. in Business, International Business and Marketing. Minor in French.',
+    dates: '2011 – 2015',
+  },
+  {
+    school: 'New York University',
+    detail: 'Summer Publishing Institute, Certificate in Publishing',
+    dates: '2015',
+  },
+];
+---
+
+<BaseLayout
+  title="Resume | Emily Denis"
+  description="Resume for Emily Denis, Principal Product Manager for AI Products at Monetate. Eight years in data and AI products, plus three consumer apps designed, built, and shipped solo."
+>
+  <Header backLink />
+
+  <main class="mx-auto max-w-3xl px-6 pb-20 pt-12 print:max-w-none print:px-0 print:pb-0 print:pt-0">
+    <div class="mb-10 flex flex-wrap items-end justify-between gap-4 print:hidden">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-wide text-indigo-600 dark:text-indigo-400">
+          Resume
+        </p>
+        <p class="mt-2 max-w-md text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+          Last updated {UPDATED}. Prefer a file? Grab the PDF.
+        </p>
+      </div>
+      <a href="/resume.pdf" download class="btn-primary">Download PDF ↓</a>
+    </div>
+
+    <article class="resume card p-8 sm:p-10 print:rounded-none print:bg-white print:p-0 print:shadow-none print:ring-0">
+      <header class="border-b border-zinc-950/10 pb-5 dark:border-white/10">
+        <h1 class="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-4xl print:text-2xl">
+          Emily R. Denis
+        </h1>
+        <p class="mt-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+          Principal Product Manager, AI Products
+        </p>
+        <p class="mt-3 flex flex-wrap gap-x-2 gap-y-1 text-sm text-zinc-600 dark:text-zinc-400">
+          {
+            contact.map((c, i) => (
+              <>
+                {i > 0 && <span class="text-zinc-300 dark:text-zinc-600">|</span>}
+                {c.href ? (
+                  <a href={c.href} class="hover:text-indigo-600 dark:hover:text-indigo-400">
+                    {c.label}
+                  </a>
+                ) : (
+                  <span>{c.label}</span>
+                )}
+              </>
+            ))
+          }
+        </p>
+      </header>
+
+      <section class="res-section">
+        <h2 class="res-h2">Summary</h2>
+        <p class="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{summary}</p>
+      </section>
+
+      <section class="res-section">
+        <h2 class="res-h2">Independent Product Work</h2>
+        <p class="mt-3 text-sm italic leading-relaxed text-zinc-600 dark:text-zinc-400">
+          {independent.intro}
+        </p>
+        <ul class="res-bullets">
+          {
+            independent.projects.map((p) => (
+              <li>
+                {/* kept on one line: newlines here render as stray spaces inside the parens */}
+                <strong class="font-semibold text-zinc-800 dark:text-zinc-200">{p.name}</strong>{' ('}<a href={p.href} class="text-indigo-600 hover:underline dark:text-indigo-400">{p.hrefLabel}</a>{'). '}{p.body}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="res-section">
+        <h2 class="res-h2">Experience</h2>
+        {
+          experience.map((role) => (
+            <div class="res-role mt-5">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+                <h3 class="text-base font-bold text-zinc-900 dark:text-white">
+                  {role.company}
+                  {role.note && (
+                    <span class="font-normal text-zinc-500 dark:text-zinc-400"> ({role.note})</span>
+                  )}
+                </h3>
+                <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400">{role.dates}</p>
+              </div>
+              <p class="text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+                {role.title}
+                <span class="font-normal text-zinc-500 dark:text-zinc-400"> · {role.location}</span>
+              </p>
+              <ul class="res-bullets">
+                {role.bullets.map((b) => <li>{b}</li>)}
+              </ul>
+              {role.sections?.map((s) => (
+                <div class="mt-3">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                    {s.label}
+                  </p>
+                  <ul class="res-bullets">
+                    {s.items.map((it) => (
+                      <li>
+                        <strong class="font-semibold text-zinc-800 dark:text-zinc-200">
+                          {it.name}.
+                        </strong>{' '}
+                        {it.body}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ))
+        }
+
+        <div class="res-role mt-5">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+            <h3 class="text-base font-bold text-zinc-900 dark:text-white">{earlier.heading}</h3>
+            <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400">{earlier.dates}</p>
+          </div>
+          <ul class="res-bullets">
+            {earlier.bullets.map((b) => <li set:html={b} />)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="res-section">
+        <h2 class="res-h2">Skills</h2>
+        <ul class="mt-3 space-y-2">
+          {
+            skills.map((s) => (
+              <li class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <strong class="font-semibold text-zinc-800 dark:text-zinc-200">{s.group}.</strong>{' '}
+                {s.items}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="res-section">
+        <h2 class="res-h2">Education</h2>
+        <ul class="mt-3 space-y-2">
+          {
+            education.map((e) => (
+              <li class="flex flex-wrap items-baseline justify-between gap-x-3 text-sm">
+                <span class="text-zinc-600 dark:text-zinc-400">
+                  <strong class="font-semibold text-zinc-800 dark:text-zinc-200">{e.school}</strong>
+                  {'. '}
+                  {e.detail}
+                </span>
+                <span class="text-xs font-medium text-zinc-500 dark:text-zinc-400">{e.dates}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<!--
+  Print / PDF rules. `npm run resume:pdf` drives headless Chrome over this page,
+  so these rules define the downloadable PDF as much as a Cmd+P does.
+  Goal: single-column, selectable text, ATS-readable, on US Letter.
+-->
+<style is:global>
+  @media print {
+    @page {
+      size: letter;
+      margin: 0.45in 0.5in;
+    }
+
+    html,
+    body {
+      background: #fff !important;
+      color: #18181b !important;
+      font-size: 9.3pt;
+      line-height: 1.36;
+    }
+
+    /* Force the light palette: a dark-mode PDF would print as a black page. */
+    * {
+      color-scheme: light !important;
+      box-shadow: none !important;
+    }
+
+    header[class*='sticky'],
+    footer {
+      display: none !important;
+    }
+
+    .resume {
+      background: #fff !important;
+    }
+
+    .resume h1 {
+      color: #18181b !important;
+    }
+
+    .resume a {
+      color: #3730a3 !important;
+      text-decoration: none !important;
+    }
+
+    .resume p,
+    .resume li,
+    .resume span {
+      color: #27272a !important;
+    }
+
+    .resume strong,
+    .resume h2,
+    .resume h3 {
+      color: #000 !important;
+    }
+
+    .res-section {
+      margin-top: 10pt;
+    }
+
+    .res-h2 {
+      border-bottom: 0.75pt solid #a1a1aa !important;
+      font-size: 8.6pt;
+      padding-bottom: 1.5pt;
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+
+    .res-bullets {
+      margin-top: 2pt;
+      padding-left: 13pt;
+    }
+
+    .res-bullets > li {
+      margin-top: 1.5pt;
+    }
+
+    .resume header h1 {
+      font-size: 17pt;
+    }
+
+    /* Never split a job across pages. */
+    .res-role {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      margin-top: 7pt;
+    }
+
+    .resume > header {
+      padding-bottom: 6pt;
+    }
+  }
+</style>

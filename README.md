@@ -35,10 +35,24 @@ shows you — typically:
 automatically once DNS propagates. Verify with `dig emilydenis.com` and then
 `curl -I https://emilydenis.com`.
 
+## Resume
+
+`src/pages/resume.astro` is the single source of truth. The PDF is generated
+from it, so edit the page and never the PDF:
+
+```bash
+npm run resume:pdf   # builds, prints /resume via headless Chrome → public/resume.pdf
+```
+
+Requires Google Chrome. Keep the output at two pages, single column, with real
+selectable text so applicant tracking systems can parse it. `public/resume.pdf`
+is committed, since Render builds straight from the repo.
+
+Resumes tailored to a specific company are deliberately kept **out of this
+repo** so nothing company-specific is ever published to the site.
+
 ## Content TODOs
 
-- `src/components/Footer.astro` — replace the LinkedIn URL with the real one.
-- `public/resume.pdf` — drop in the resume (footer already links to it).
 - `src/pages/hangeasy.astro` / `napmap.astro` — `TODO(emily)` notes at the top
   of each file list the personal facts (origin stories, traction) worth adding.
 
