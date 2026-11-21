@@ -9,7 +9,7 @@ const APP = 'https://fitscript.emilydenis.com';
 
 <BaseLayout
   title="FitScript Case Study | Emily Denis"
-  description="An AI training coach that builds your race plan and adjusts each day to how you slept and how you feel. Rules make the training calls and the AI explains them. PM case study by Emily Denis."
+  description="An AI training coach that builds your race plan, keeps you improving between races, and adjusts each day to how you slept and how you feel. Rules make the training calls and the AI explains them. PM case study by Emily Denis."
   ogImage="/images/fitscript-dashboard.png"
 >
   <Header backLink />
@@ -17,7 +17,7 @@ const APP = 'https://fitscript.emilydenis.com';
   <CaseStudyHero
     title="FitScript"
     tagline="Case study · AI personalized guidance"
-    intro="An AI training coach that builds a plan for your race, then adjusts each day's workout to how you slept and how you feel. Rules make every training call. The AI explains the call in plain language and writes the workouts, and everything it writes is checked before you see it."
+    intro="An AI training coach that builds a plan for your race, keeps you improving between races, and adjusts each day's workout to how you slept and how you feel. Rules make every training call. The AI explains the call in plain language and writes the workouts, and everything it writes is checked before you see it."
     facts={[
       { label: 'Role', value: 'PM · design · engineering (solo)' },
       { label: 'Status', value: 'Live, in daily use' },
@@ -192,6 +192,97 @@ const APP = 'https://fitscript.emilydenis.com';
       <figcaption class="mt-2 text-center text-sm text-zinc-400">Planned against actual, week by week, with a table view of the same numbers.</figcaption>
     </figure>
 
+    <h3>Your plan, wherever you are</h3>
+    <p>
+      I check my calendar and talk to Claude far more often than I open a
+      training app, so the plan goes to both. A private subscription link puts
+      it in Google Calendar, Apple Calendar, or Outlook as all-day events that
+      never block your time, and a session the rules changed this morning is
+      marked "changed today."
+    </p>
+    <p>
+      A Claude connector lets you ask what today's workout is, check in, or
+      move a session from a conversation. It runs on the same rules as the app:
+      Claude can explain a decision and make the changes you ask for, but it
+      can't invent a session or overrule the plan, and every change goes through
+      the same spacing checks as a move in the app. Strava's terms don't allow
+      its data to go to AI models, so the connector shares the plan and your
+      check-ins only. Both links are private, and you can replace or turn off
+      either one from Settings.
+    </p>
+
+    <h2>The next question: what happens after race day?</h2>
+    <p>
+      Writing the plan engine raised a question I hadn't designed for. The day
+      after the Big Apple Half, I'd have no race on the calendar, and FitScript
+      would quietly fall back to version one: one AI-picked workout a day, with
+      no plan, no progress, and none of the rules above. The goals people set in
+      Settings (strength, endurance, general fitness, weight loss) weren't
+      shaping any plan at all.
+    </p>
+    <p>
+      I wrote the fix up as a spec before building it, with the open decisions
+      listed at the end. The core idea is that <strong>every athlete always has
+      exactly one plan in effect</strong>: a race plan while a race block is
+      under way, a short recovery block right after a race, and otherwise an
+      ongoing plan built from their goals in 4-week cycles. Everything
+      downstream already ran off a plan, so the morning check-in, the rules
+      table, "Do it as planned," progress, and the calendar all work the same
+      with or without a race.
+    </p>
+
+    <h3>Holding steady wasn't what I wanted</h3>
+    <p>
+      My first draft had volume build to a comfortable ceiling between races
+      and hold there. Reading it back as the athlete, I didn't want to hold. I
+      wanted to keep getting better, and "better" without a race needs a reason
+      for each block and a way to see it. So the default became
+      <strong>keep improving</strong>:
+    </p>
+    <ul>
+      <li>
+        <strong>Base cycles</strong> build volume gently, about 5% a week, back
+        toward your last race block and then a little past it.
+      </li>
+      <li>
+        <strong>Sharpen cycles</strong> hold volume steady while the hard
+        sessions progress: one more interval each week, a little more tempo.
+      </li>
+      <li>
+        <strong>A 5K time trial every 8 weeks</strong> answers "am I improving?"
+        You log your time, and it sets the next cycle's paces and shows as a
+        trend. A local 5K race counts.
+      </li>
+      <li>
+        <strong>A time goal with no date</strong>, like a faster 5K, is optional.
+        Speed work trains toward it as fast as is safe from your latest result,
+        and once it's in reach, FitScript suggests finding a race.
+      </li>
+    </ul>
+    <p>
+      "Maintain" stays available in Settings for busy stretches.
+    </p>
+
+    <h3>Goals that actually shape the week</h3>
+    <p>
+      Each goal now maps to a weekly mix. An endurance week has a long session,
+      easy days, one quality session, and strength. A strength week has three
+      rotating full-body sessions whose sets and reps progress across the
+      cycle. For weight loss, the emphasis is consistency and easy aerobic time,
+      with at most one hard day a week and no nutrition advice anywhere. Target
+      intensity caps the hard days: none, one, or two. People who don't run get
+      cardio in the activities they actually like, so the plan isn't only for
+      runners.
+    </p>
+
+    <h3>Rules for a new kind of session</h3>
+    <p>
+      A time trial needed its own row in the rules table. On a rough morning,
+      an easy run is still worth doing, but an easy time trial measures nothing.
+      So a time trial on an amber or red day moves to a later day that week,
+      and if there isn't one, it waits for the next cycle.
+    </p>
+
     <h2>Product decisions</h2>
 
     <h3>1 · Rules decide, the AI explains</h3>
@@ -230,8 +321,22 @@ const APP = 'https://fitscript.emilydenis.com';
 
     <h3>5 · Ship what I've used</h3>
     <p>
-      Every feature in this version went through my own training first. That's
-      where the three bugs above came from, and it's why I trust the fixes.
+      The race plan and the daily calls went through my own training first.
+      That's where the three bugs above came from, and it's why I trust the
+      fixes. The ongoing plan is the exception for now: it's live, and its first
+      real test is the morning after the Big Apple Half, when my account should
+      move from the race plan to a recovery week to my first base cycle without
+      me doing anything.
+    </p>
+
+    <h3>6 · Write the spec before the code</h3>
+    <p>
+      The ongoing plan touched the generator, the database, every screen that
+      shows a plan, and the AI's instructions. I wrote it up first, with six
+      open decisions at the end, and answered them before building. One of my
+      answers changed the design: I asked what happens if I want to keep
+      improving without a race, which is how "keep improving" became the
+      default.
     </p>
 
     <h2>The quality bar</h2>
@@ -245,17 +350,21 @@ const APP = 'https://fitscript.emilydenis.com';
       relied on it. The deployed coach currently passes all 16.
     </p>
     <p>
-      The plan engine has its own unit tests (164 and counting), and a separate
+      The plan engine has its own unit tests (246 and counting), and a separate
       eval runs the AI's workouts through the same validator the app uses.
-      Coach changes ship only when the evals pass.
+      The ongoing plan added a third eval with realistic athletes: a strength
+      goal, weight loss at high intensity (never more than one hard day), low
+      intensity (no hard days at all), the week after a half marathon, and a
+      time trial on a bad morning. Coach changes ship only when the evals pass.
     </p>
 
     <h2>Under the hood</h2>
     <ul>
       <li>React, Vite, and Tailwind on the front end; Supabase for Postgres and auth, with row-level security on every table.</li>
-      <li>The plan engine is plain TypeScript with no I/O: the generator, the readiness bands, the rules table, rescheduling, and matching actuals to the plan.</li>
+      <li>The plan engine is plain TypeScript with no I/O: the race and ongoing generators, the readiness bands, the rules table, rescheduling, and matching actuals to the plan. One shared function decides which plan is in effect on any day, for the app and the server alike.</li>
       <li>The coach is Claude (Opus 5.5) with structured outputs, so every answer parses. It explains decisions, writes the workouts, and handles chat.</li>
       <li>Data from Oura, Strava, and an Apple Health relay, matched across sources so the same run never counts twice.</li>
+      <li>The Claude connector is a small MCP server running as a serverless function, with seven tools (today, the plan, check in, preview and confirm a move, undo, do as planned). The calendar is a standard iCalendar feed generated from the same plan.</li>
       <li>The zero-signup demo runs the real plan engine and the live coach entirely in memory. Nothing you do there is saved.</li>
     </ul>
 
