@@ -51,11 +51,11 @@ const FITSCRIPT_URL = 'https://fitscript.emilydenis.com';
         <ProjectCard
           title="FitScript"
           tagline="An AI coach that fits training to real life"
-          description="FitScript reads your sleep, recovery, and race calendar, asks how you're actually feeling, and suggests one workout for the day with the reasoning spelled out in your own numbers. You can adjust the plan just by telling the coach what's going on. Every change to the coach has to pass an eval suite before it ships, and a rules engine steps in whenever the AI is unavailable."
+          description="FitScript builds a training plan for your race, then adjusts each day's workout to how you slept and how you feel. Rules make every training call and the AI explains it in plain language, so the plan bends without getting unsafe. I trained for a half marathon on it, and the bugs I hit along the way shaped this version."
           image="/images/fitscript-dashboard.png"
-          imageAlt="FitScript dashboard showing an AI-coached workout recommendation with reasoning"
+          imageAlt="FitScript dashboard: today's long run shortened on an amber morning, with the coach's reason and the training plan below"
           href="/fitscript"
-          chips={['Personalized guidance', 'Conversational coaching', 'Evals', 'Oura + Strava + Apple Health', 'Claude']}
+          chips={['Training plans', 'Rules decide, AI explains', 'Evals', 'Oura + Strava + Apple Health', 'Claude']}
           links={[
             { label: 'Live demo', href: `${FITSCRIPT_URL}/demo` },
             { label: 'App', href: FITSCRIPT_URL },
@@ -111,10 +111,10 @@ const FITSCRIPT_URL = 'https://fitscript.emilydenis.com';
         <div class="card p-6">
           <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">Hold AI to a measurable bar</h3>
           <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            FitScript's coach only changes when its eval suite passes. Writing
-            those scenarios taught me more about the product than any single
-            feature did, and the suite caught a real safety gap before a user
-            ever hit it.
+            FitScript's coach only changes when its eval suite passes, and the
+            calls with real injury risk don't depend on the model at all: rules
+            make them and the AI explains them. Writing those scenarios taught
+            me more about the product than any single feature did.
           </p>
         </div>
         <div class="card p-6">
