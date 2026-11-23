@@ -192,6 +192,31 @@ const APP = 'https://fitscript.emilydenis.com';
       <figcaption class="mt-2 text-center text-sm text-zinc-400">Planned against actual, week by week, with a table view of the same numbers.</figcaption>
     </figure>
 
+    <h3>After the workout: a debrief, not a checkbox</h3>
+    <p>
+      The first time I marked a run done in my own app, the button turned
+      green and that was it. It was anticlimactic. The moment right after a
+      workout is when you most want to know how it went and whether it
+      mattered, so "Mark as done" now opens a short debrief: how hard it felt,
+      how your legs feel, anything that hurt, and an optional note.
+    </p>
+    <p>
+      What comes back is split the same way as the morning call. Code compares
+      the run with its target (distance, time, and pace from Strava), judges
+      the effort against what the session was for, and says what it did for
+      your training: the week so far, whether it was the key session, where
+      the next long run goes from here, and how many days are left to the
+      race. The AI adds two or three sentences responding to what you said.
+      Strava's terms don't allow its data to go to AI models, so the coach
+      note is written from your feedback and the plan only, and a check
+      throws out any note that cites a pace or a distance it wasn't given.
+    </p>
+    <p>
+      The debrief also feeds the next morning. An easy run that felt hard, or
+      legs that feel heavy, counts as one signal in tomorrow's readiness, and
+      feeling strong when you wake up can still outvote it.
+    </p>
+
     <h3>Your plan, wherever you are</h3>
     <p>
       I check my calendar and talk to Claude far more often than I open a
@@ -364,7 +389,7 @@ const APP = 'https://fitscript.emilydenis.com';
       relied on it. The deployed coach currently passes all 16.
     </p>
     <p>
-      The plan engine has its own unit tests (246 and counting), and a separate
+      The plan engine has its own unit tests (256 and counting), and a separate
       eval runs the AI's workouts through the same validator the app uses.
       The ongoing plan added a third eval with realistic athletes: a strength
       goal, weight loss at high intensity (never more than one hard day), low
